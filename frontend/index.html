@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Urlaubsplaner</title>
+    <link rel="shortcut icon" href="logo.svg">
+    <link rel="stylesheet" href="stylesheet.css">
+  </head>
+  <body>
+    <div id="app">
+      <h1>Urlaubsplaner</h1>
+
+      <p>Year: <input type="number" min="2017" max="2028" v-model.number="currentYearNumber"></p>
+
+      <div v-if="currentYear" class="year">
+        <template v-for="month of currentYear.months">
+          <div class="month">{{ month.getName() }}</div>
+          <div
+            v-for="day of month.days" :key="day.getIsoDate()"
+            class="day" :class="day.getClass()"
+            :title="day.getHolidayName()"
+            @mousedown.left="increaseDayStatus(day)"
+            @mousemove="applyCurrentStatus(day)">
+            <div v-if="day.isToday()" class="today-mark">
+              <img src="today.svg" alt="">
+            </div>
+            <span class="name">{{ day.getShortName() }}</span>
+            <span class="number">{{ day.number }}</span>
+          </div>
+        </template>
+      </div>
+
+      <div v-if="currentYear" class="days-bar">
+        <div
+          v-for="n in totalDaysAvailable"
+          :class="{planned: n <= currentYear.countPlanned(), requested: n <= currentYear.countRequested(), approved: n <= currentYear.countApproved()}">
+          <span>{{ n }}</span>
+          <div v-if="n == Math.floor(currentYear.countPlanned()) && currentYear.countPlanned() > currentYear.countRequested()" class="arrow">
+            <img src="arrow.svg" alt="">
+            planned
+          </div>
+          <div v-if="n == Math.floor(currentYear.countRequested()) && currentYear.countRequested() > currentYear.countApproved()" class="arrow">
+            <img src="arrow.svg" alt="">
+            requested
+          </div>
+          <div v-if="n == Math.floor(currentYear.countApproved())" class="arrow">
+            <img src="arrow.svg" alt="">
+            approved
+          </div>
+        </div>
+      </div>
+
+      <p>Available holidays: <input type="number" min="1" max="300" v-model.number="totalDaysAvailable"></p>
+    </div>
+
+    <script src="scripts/luxon.min.js"></script>
+    <!-- <script src="scripts/vue.js"></script> -->
+    <script src="scripts/vue.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

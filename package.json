@@ -1,0 +1,37 @@
+{
+  "name": "urlaubsplaner",
+  "version": "1.0.0",
+  "description": "Simple vacation days planning tool",
+  "main": "backend/main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "npx electron-builder --dir",
+    "dist": "npx electron-builder"
+  },
+  "author": "Simon \"Tenry\" Burchert",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "electron": "^15.3.1",
+    "electron-builder": "^22.13.1"
+  },
+  "build": {
+    "appId": "net.tenry.urlaubsplaner",
+    "productName": "Urlaubsplaner",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": "zip",
+      "icon": "assets/icons/logo.icns",
+      "electronLanguages": [
+        "de", "en"
+      ]
+    },
+    "win": {
+      "target": "zip",
+      "icon": "assets/icons/logo.ico"
+    },
+    "linux": {
+      "target": "tar.gz"
+    }
+  }
+}

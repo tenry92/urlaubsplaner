@@ -1,0 +1,104 @@
+:root {
+  --theme-color: #94b3fd;
+  --color-green: #a8fd94;
+  --color-yellow: #f5fd94;
+  --color-orange: #fdca94;
+  --color-red: #fd9494;
+  --color-pink: #fd94f9;
+  --color-purple: #c794fd;
+  --color-blue: #94a9fd;
+  --color-gray: #c9c9c9;
+  --color-darkgray: #7a7a7a;
+
+  --color-planned: var(--color-pink);
+  --color-requested: var(--color-yellow);
+  --color-approved: var(--color-green);
+}
+
+.days-bar {
+  display: grid;
+  grid-template-columns: repeat(30, 1fr);
+  margin: 8px 0 4em;
+}
+
+.days-bar > * {
+  padding: 4px;
+  border: 1px solid black;
+}
+
+.days-bar .arrow {
+  position: absolute;
+}
+
+.days-bar .arrow img {
+  height: 2em;
+}
+
+.year {
+  display: grid;
+  grid-template-columns: repeat(32, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+}
+
+.year > * {
+  padding: 4px;
+  border: 1px solid black;
+}
+
+.year .month {
+  grid-column-start: 1;
+}
+
+.year .day {
+  position: relative;
+  padding-top: 12px;
+  cursor: default;
+  user-select: none;
+  background: white;
+}
+
+.year .day .today-mark {
+  position: absolute;
+  z-index: 1;
+  transform: translate(-47%, -49%) scale(0.14);
+  pointer-events: none;
+}
+
+.year .day:hover {
+  filter: brightness(0.9);
+}
+
+.year .day:active {
+  filter: brightness(0.8);
+}
+
+.year .day .name {
+  position: absolute;
+  font-size: 10px;
+  top: 0;
+}
+
+.year .day.weekend {
+  background: var(--color-gray);
+  color: var(--color-darkgray);
+}
+
+.year .day.planned, .days-bar .planned {
+  background-color: var(--color-planned);
+}
+
+.year .day.requested, .days-bar .requested {
+  background-color: var(--color-requested);
+}
+
+.year .day.approved, .days-bar .approved {
+  background-color: var(--color-approved);
+}
+
+.year .day.holiday {
+  background-color: var(--color-blue);
+}
+
+.year .day.half-holiday {
+  background-image: linear-gradient(to bottom right, transparent 0%, transparent 50%, var(--color-blue) 50%);
+}
