@@ -290,11 +290,7 @@
           return;
         }
 
-        if(!(number in this.years)) {
-          this.years[number] = new Year(number);
-        }
-
-        this.currentYear = this.years[number];
+        this.updateCurrentYear();
       },
     },
     methods: {
@@ -397,6 +393,13 @@
           port2.postMessage({type: 'touch'});
         }
       },
+      updateCurrentYear() {
+        if(!(this.currentYearNumber in this.years)) {
+          this.years[this.currentYearNumber] = new Year(this.currentYearNumber);
+        }
+
+        this.currentYear = this.years[this.currentYearNumber];
+      },
     },
   });
 
@@ -413,6 +416,7 @@
 
       if(dateTime.year != app.currentYearNumber) {
         app.currentYearNumber = dateTime.year;
+        app.updateCurrentYear();
       }
 
       app.currentYear.findDay(dateTime.month, dateTime.day).status = status;
