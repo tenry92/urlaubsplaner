@@ -1,6 +1,6 @@
 {
   "name": "urlaubsplaner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple vacation days planning tool",
   "main": "backend/main.js",
   "scripts": {
@@ -23,7 +23,8 @@
       "target": "zip",
       "icon": "assets/icons/logo.icns",
       "electronLanguages": [
-        "de", "en"
+        "de",
+        "en"
       ]
     },
     "win": {
